@@ -1,0 +1,17 @@
+---
+
+name: "Marcus Jaschen Blog"
+url: "https://www.marcusjaschen.de/"
+filter:
+    - css: "div#main"
+    - html2text:
+        method: re
+
+---
+
+name: "Marcus Jaschen Blog Sidebar"
+url: "https://www.marcusjaschen.de/"
+filter:
+    - css: "div#sidebar"
+    - html2text:
+        method: re

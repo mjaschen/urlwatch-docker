@@ -1,0 +1,2 @@
+*/15 * * * * cd /data/urlwatch && urlwatch --verbose --urls urls.yaml --config urlwatch.yaml --hooks hooks.py --cache cache.db
+
