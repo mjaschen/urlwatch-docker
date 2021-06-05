@@ -14,6 +14,8 @@ RUN set -xe \
                           python3         \
                           python3-dev     \
                           py-pip          \
+                          rust            \
+                          cargo           \
     && python3 -m pip install appdirs   \
                               cssselect \
                               keyring   \
