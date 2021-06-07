@@ -5,6 +5,7 @@ ENV APP_USER urlwatch
 RUN set -xe \
     && apk add --no-cache ca-certificates \
                           build-base      \
+                          cargo           \
                           libffi-dev      \
                           libxml2         \
                           libxml2-dev     \
@@ -15,7 +16,6 @@ RUN set -xe \
                           python3-dev     \
                           py-pip          \
                           rust            \
-                          cargo           \
     && python3 -m pip install appdirs   \
                               cssselect \
                               keyring   \
