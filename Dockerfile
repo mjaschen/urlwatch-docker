@@ -25,6 +25,7 @@ RUN set -xe \
                               requests  \
                               chump     \
                               urlwatch  \
+                              html2text \
     && apk del build-base  \
                libffi-dev  \
                libxml2-dev \
