@@ -17,15 +17,15 @@ RUN set -xe \
                           py-pip          \
                           rust            \
     && python3 -m pip install appdirs   \
+                              chump     \
                               cssselect \
+                              html2text \
                               keyring   \
                               lxml      \
                               minidb    \
                               pyyaml    \
                               requests  \
-                              chump     \
                               urlwatch  \
-                              html2text \
     && apk del build-base  \
                libffi-dev  \
                libxml2-dev \
