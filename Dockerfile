@@ -1,6 +1,6 @@
-FROM alpine
+FROM alpine as builder
 
-ENV APP_USER urlwatch
+ENV PATH="/opt/venv/bin:${PATH}"
 
 RUN set -xe \
     && apk add --no-cache ca-certificates \
@@ -16,6 +16,7 @@ RUN set -xe \
                           python3-dev     \
                           py-pip          \
                           rust            \
+    && python3 -m venv --copies /opt/venv \
     && python3 -m pip install appdirs   \
                               chump     \
                               cssselect \
@@ -25,13 +26,14 @@ RUN set -xe \
                               minidb    \
                               pyyaml    \
                               requests  \
-                              urlwatch  \
-    && apk del build-base  \
-               libffi-dev  \
-               libxml2-dev \
-               libxslt-dev \
-               openssl-dev \
-               python3-dev
+                              urlwatch
+
+FROM python:3.10-alpine as deploy
+
+ENV APP_USER urlwatch
+
+COPY --from=builder /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:${PATH}"
 
 RUN addgroup $APP_USER
 RUN adduser -D -G $APP_USER $APP_USER
