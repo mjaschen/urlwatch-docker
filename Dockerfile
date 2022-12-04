@@ -17,6 +17,7 @@ RUN set -xe \
                           py-pip          \
                           rust            \
     && python3 -m venv --copies /opt/venv \
+    && python3 -m pip install --upgrade pip wheel \
     && python3 -m pip install appdirs   \
                               chump     \
                               cssselect \
