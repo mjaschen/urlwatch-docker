@@ -3,10 +3,6 @@ name: Build and publish Docker image
 on:
   push:
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: urlwatch
-
 jobs:
 
   docker:
@@ -37,7 +33,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ghcr.io/mjaschen/urlwatch
         tags: |
           type=schedule
           type=ref,event=branch
