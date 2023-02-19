@@ -1,4 +1,4 @@
-FROM alpine as builder
+FROM alpine:3.17 as builder
 
 ENV PATH="/opt/venv/bin:${PATH}"
 
@@ -29,7 +29,7 @@ RUN set -xe \
                               requests  \
                               urlwatch
 
-FROM python:3.10-alpine as deploy
+FROM python:3.10-alpine3.17 as deploy
 
 ENV APP_USER urlwatch
 
