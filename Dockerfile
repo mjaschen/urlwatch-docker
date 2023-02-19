@@ -50,4 +50,6 @@ WORKDIR /data/urlwatch
 COPY crontab /var/spool/cron/crontabs/$APP_USER
 RUN chmod 0600 /var/spool/cron/crontabs/$APP_USER
 
+RUN rm /var/spool/cron/crontabs/root
+
 CMD ["crond", "-f", "-l", "6", "-L", "/dev/stdout"]
