@@ -45,9 +45,8 @@ RUN mkdir -p /data/urlwatch \
 
 VOLUME /data/urlwatch
 
-WORKDIR /data/urlwatch
+COPY crontabfile ./crontabfile
+COPY run.sh ./run.sh
 
-COPY crontab /var/spool/cron/crontabs/$APP_USER
-RUN chmod 0600 /var/spool/cron/crontabs/$APP_USER
 
-CMD ["crond", "-f", "-l", "6", "-L", "/dev/stdout"]
+CMD ["./run.sh"]
