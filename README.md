@@ -27,7 +27,7 @@ For running every hour instead of the default 15 minutes, change `crontab` as fo
 Mount `crontab` into the container:
 
 ```shell
-docker-compose run --rm --volume "$(pwd)/crontab:/var/spool/cron/crontabs/urlwatch" --volume "$(pwd):/data" --volume /etc/localtime:/etc/localtime:ro urlwatch
+docker-compose run --rm --volume "$(pwd)/crontabfile:/crontabfile:ro" --volume "$(pwd):/data" --volume /etc/localtime:/etc/localtime:ro urlwatch
 ```
 
 or add the mount to `docker-compose.yml`:
@@ -42,7 +42,7 @@ services:
   urlwatch:
     image: ghcr.io/mjaschen/urlwatch
     volumes:
-      - ./crontab:/var/spool/cron/crontabs/urlwatch:ro
+      - ./crontabfile:/crontabfile:ro
       - ./data:/data/urlwatch
       - /etc/localtime:/etc/localtime:ro
     restart: "unless-stopped"
