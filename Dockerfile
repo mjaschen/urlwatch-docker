@@ -48,7 +48,6 @@ VOLUME /data/urlwatch
 COPY crontabfile ./crontabfile
 COPY run.sh ./run.sh
 
-
 RUN rm /var/spool/cron/crontabs/root
 
-CMD ["./run.sh"]
+CMD ["/bin/sh", "run.sh"]
