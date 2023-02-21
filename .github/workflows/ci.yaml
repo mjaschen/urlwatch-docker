@@ -3,6 +3,9 @@ name: Build and publish Docker image
 on:
   push:
 
+env:
+  BUILD_PLATFORMS="linux/amd64,linux/arm64"
+
 jobs:
 
   docker:
@@ -65,7 +68,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          platforms: linux/amd64,linux/arm/v7,linux/arm64
+          platforms: ${{ env.BUILD_PLATFORMS }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
