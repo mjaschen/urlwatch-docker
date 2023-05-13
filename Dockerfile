@@ -1,40 +1,10 @@
-FROM alpine:3.17 as builder
+FROM alpine:3.18
 
-ENV PATH="/opt/venv/bin:${PATH}"
-
-RUN set -xe \
-    && apk add --no-cache ca-certificates \
-                          build-base      \
-                          cargo           \
-                          libffi-dev      \
-                          libxml2         \
-                          libxml2-dev     \
-                          libxslt         \
-                          libxslt-dev     \
-                          openssl-dev     \
-                          python3         \
-                          python3-dev     \
-                          py-pip          \
-                          rust            \
-    && python3 -m venv --copies /opt/venv \
-    && python3 -m pip install --upgrade pip wheel \
-    && python3 -m pip install appdirs   \
-                              chump     \
-                              cssselect \
-                              html2text \
-                              keyring   \
-                              lxml      \
-                              minidb    \
-                              pyyaml    \
-                              requests  \
-                              urlwatch
-
-FROM python:3.10-alpine3.17 as deploy
+RUN apk add --no-cache \
+            urlwatch --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
+    && rm -rf /lib/apk/db/*
 
 ENV APP_USER urlwatch
-
-COPY --from=builder /opt/venv /opt/venv
-ENV PATH="/opt/venv/bin:${PATH}"
 
 RUN addgroup $APP_USER
 RUN adduser -D -G $APP_USER $APP_USER
