@@ -2,15 +2,22 @@ FROM python:3.11.3-alpine3.18 as builder
 
 RUN apk add --no-cache \
     binutils \
+    gcc \
     git \
-    upx                 
+    libc-dev \
+    libffi-dev \
+    upx
 
 # Update pip, wheel and setuptools, install pyinstaller
-RUN python3 -m pip install --upgrade pip wheel setuptools \
+RUN python3 -m pip install --upgrade \
+    pip \
+    setuptools \
+    wheel \
     && python3 -m pip install pyinstaller
 
 # Get latest urlwatch source
 RUN git clone https://github.com/thp/urlwatch.git
+
 WORKDIR /urlwatch
 
 # Install requirements and urlwatch from source
@@ -23,9 +30,9 @@ RUN python3 -m pip install \
     chump \
     html2text
 
-# Build the executable file (-F) and strip debug symbols 
+# Build the executable file (-F) and strip debug symbols
 # Use pythons optimize flag (-OO) to remove doc strings, assert statements, sets __debug__ to false
-RUN python3 -OO -m PyInstaller -F --strip urlwatch 
+RUN python3 -OO -m PyInstaller -F --strip urlwatch
 
 # Debug: list warnings
 # RUN cat build/urlwatch/warn-urlwatch.txt
