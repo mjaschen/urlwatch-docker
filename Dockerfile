@@ -37,7 +37,7 @@ ENV APP_USER urlwatch
 COPY --from=builder /urlwatch/dist/urlwatch /usr/local/bin/urlwatch
 
 RUN addgroup $APP_USER
-RUN adduser -D -G $APP_USER $APP_USER
+RUN adduser --disabled-password --ingroup $APP_USER $APP_USER
 
 RUN mkdir -p /data/urlwatch \
   && chown -R $APP_USER:$APP_USER /data/urlwatch \
