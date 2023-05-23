@@ -2,8 +2,8 @@ name: Maintenance Tasks
 
 on:
   push:
-    tags:
-      - '*'
+    # tags:
+    #   - '*'
 
 jobs:
 
