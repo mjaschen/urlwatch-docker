@@ -14,6 +14,28 @@ docker-compose logs -f
 docker-compose down
 ```
 
+### Run Without Docker Compose
+
+If you don't want to use *Docker Compose*, you can run the container with *Docker*:
+
+```shell
+# run once
+docker run --rm --interactive --tty \
+    --volume "$(pwd)/data":/data/urlwatch \
+    --volume /etc/localtime:/etc/localtime:ro \
+    ghcr.io/mjaschen/urlwatch
+
+# run in background and restart automatically
+docker run --tty --detach --restart unless-stopped \
+    --name urlwatch \
+    --volume "$(pwd)/data":/data/urlwatch \
+    --volume /etc/localtime:/etc/localtime:ro \
+    ghcr.io/mjaschen/urlwatch
+
+# watch log output
+docker logs --follow urlwatch
+```
+
 ### Change *cron* interval
 
 *urlwatch* runs once every 15 minutes with the provided default settings. It's possible to adjust that interval by editing the provided `crontab` file and mount in into the container.
