@@ -1,6 +1,6 @@
 ## Setup
 
-1. add URLs to `data/urls.yaml` (see `data/urls.example.yaml` for two simple examples or take a look at the [Jobs section](https://urlwatch.readthedocs.io/en/latest/jobs.html) in the *urlwatch* documentation for all details)
+1. add URLs to `data/urls.yaml` (see `data/urls.example.yaml` for two simple examples or see the [Jobs section](https://urlwatch.readthedocs.io/en/latest/jobs.html) in the *urlwatch* documentation for all details)
 1. copy `data/urlwatch.template.yaml` to `data/urlwatch.yaml` and configure at least one reporter (e.g. SMTP account details)
 1. run *urlwatch*:
 
@@ -38,9 +38,9 @@ docker logs --follow urlwatch
 
 ### Change *cron* interval
 
-*urlwatch* runs once every 15 minutes with the provided default settings. It's possible to adjust that interval by editing the provided `crontab` file and mount in into the container.
+*urlwatch* runs once every 15 minutes by default. It's possible to change this interval by editing the provided `crontab` file and mounting it into the container.
 
-For running every hour instead of the default 15 minutes, change `crontab` as following:
+To run every hour instead of the default 15 minutes, change `crontab` as follows:
 
 ```crontab
 0 * * * * cd /data/urlwatch && urlwatch --verbose --urls urls.yaml --config urlwatch.yaml --hooks hooks.py --cache cache.db
@@ -74,6 +74,6 @@ services:
 
 ## Build Locally
 
-- clone repository: `git clone git@github.com:mjaschen/urlwatch-docker.git`
-- adjust interval in crontab if needed (urlwatch is started every 15 minutes with the provided default)
+- clone the repository: `git clone git@github.com:mjaschen/urlwatch-docker.git`
+- adjust the interval in crontab if necessary (urlwatch is started every 15 minutes by default)
 - build the image and run *urlwatch*
