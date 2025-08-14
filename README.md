@@ -5,13 +5,13 @@
 1. run *urlwatch*:
 
 ```shell
-docker-compose up -d
+docker compose up -d
 
 # watch log output
-docker-compose logs -f
+docker compose logs -f
 
 # stop urlwatch
-docker-compose down
+docker compose down
 ```
 
 ### Run Without Docker Compose
@@ -49,10 +49,10 @@ To run every hour instead of the default 15 minutes, change `crontab` as follows
 Mount `crontab` into the container:
 
 ```shell
-docker-compose run --rm --volume "$(pwd)/crontabfile:/crontabfile:ro" --volume "$(pwd):/data" --volume /etc/localtime:/etc/localtime:ro urlwatch
+docker compose run --rm --volume "$(pwd)/crontabfile:/crontabfile:ro" --volume "$(pwd):/data" --volume /etc/localtime:/etc/localtime:ro urlwatch
 ```
 
-or add the mount to `docker-compose.yml`:
+or add the mount to `docker compose.yml`:
 
 ```yaml
 version: '3'
