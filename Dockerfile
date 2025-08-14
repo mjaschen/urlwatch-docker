@@ -1,4 +1,4 @@
-FROM python:3.11.3-alpine3.18 as builder
+FROM python:3.13.6-alpine3.22 AS builder
 
 RUN apk add --no-cache \
     binutils \
@@ -38,8 +38,8 @@ RUN python3 -OO -m PyInstaller -F --strip urlwatch
 # RUN cat build/urlwatch/warn-urlwatch.txt
 
 
-FROM alpine:3.18 as deploy
-ENV APP_USER urlwatch
+FROM alpine:3.22 AS deploy
+ENV APP_USER=urlwatch
 
 COPY --from=builder /urlwatch/dist/urlwatch /usr/local/bin/urlwatch
 
@@ -47,8 +47,8 @@ RUN addgroup $APP_USER
 RUN adduser --disabled-password --ingroup $APP_USER $APP_USER
 
 RUN mkdir -p /data/urlwatch \
-  && chown -R $APP_USER:$APP_USER /data/urlwatch \
-  && chmod 0755 /data/urlwatch
+    && chown -R $APP_USER:$APP_USER /data/urlwatch \
+    && chmod 0755 /data/urlwatch
 
 VOLUME /data/urlwatch
 

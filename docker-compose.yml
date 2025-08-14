@@ -1,15 +1,13 @@
-version: '3'
-
 networks:
     urlwatch:
 
 services:
-  urlwatch:
-    image: ghcr.io/mjaschen/urlwatch
-    container_name: urlwatch
-    volumes:
-      - ./data:/data/urlwatch
-      - /etc/localtime:/etc/localtime:ro
-    restart: "unless-stopped"
-    networks:
-      - urlwatch
+    urlwatch:
+        image: ghcr.io/mjaschen/urlwatch
+        container_name: urlwatch
+        volumes:
+            - ./data:/data/urlwatch
+            - /etc/localtime:/etc/localtime:ro
+        restart: "unless-stopped"
+        networks:
+            - urlwatch
